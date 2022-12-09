@@ -1,9 +1,14 @@
 import { SocialIcon } from "react-social-icons";
 import SearchInput from "../components/SearchInput";
+import { useAppDispatch } from "../redux/hooks";
+import { fetchMoviesByQuery, setQuery } from "../redux/moviesSlice";
 
 const Header = (): JSX.Element => {
+  const dispatch = useAppDispatch();
+
   const handleSearch = (searchStr: string) => {
-    console.log(searchStr);
+    dispatch(setQuery(searchStr));
+    dispatch(fetchMoviesByQuery(searchStr));
   };
 
   return (
