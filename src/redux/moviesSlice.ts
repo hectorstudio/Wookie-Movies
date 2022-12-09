@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { RootState } from "./store";
 import * as Service from "../services/movies";
 
 export interface IMovie {
@@ -12,21 +11,24 @@ export interface IMovie {
   imdb_rating: number;
   length: string;
   overview: string;
-  release_on: string;
+  released_on: string;
   slug: string;
   title: string;
+  poster: string;
 }
 
-export interface MvoiesState {
+export interface MoviesState {
   query: string;
   loading: boolean;
   error?: string;
+  movies: IMovie[];
   list: Record<string, IMovie[]>;
 }
 
-const initialState: MvoiesState = {
+const initialState: MoviesState = {
   query: "",
   loading: false,
+  movies: [],
   list: {},
 };
 
@@ -71,6 +73,7 @@ export const moviesSlice = createSlice({
         });
 
         state.list = list;
+        state.movies = movies;
       })
       .addCase(fetchMoviesByQuery.rejected, (state) => {
         state.loading = false;
@@ -80,7 +83,5 @@ export const moviesSlice = createSlice({
 });
 
 export const { setQuery } = moviesSlice.actions;
-
-export const selectMovies = (state: RootState) => state.movies.list;
 
 export default moviesSlice.reducer;

@@ -1,5 +1,6 @@
-import Layout from './layouts';
 import { Route, Routes } from 'react-router-dom';
+
+import Layout from './layouts';
 import MoviesList from './pages/MoviesList';
 import MovieDetail from './pages/MovieDetail';
 
@@ -9,7 +10,7 @@ function App() {
       <Layout>
         <Routes>
           <Route
-            path="/movies"
+            path="/"
             element={<MoviesList />}
           />
           <Route
